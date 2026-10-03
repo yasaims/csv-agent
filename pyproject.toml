@@ -1,0 +1,30 @@
+[project]
+name = "csv-agent"
+version = "0.1.0"
+description = "Sample agent that answers questions about a single small CSV file with a local Ollama model"
+readme = "README.md"
+authors = [
+    { name = "yasaims", email = "" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "ollama>=0.6.3",
+    "rank-bm25>=0.2.2",
+]
+
+[build-system]
+requires = ["uv_build>=0.11.29,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[project.scripts]
+csv-agent = "csv_agent.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-m 'not ollama'"
+markers = ["ollama: semantic tests that call a real local Ollama server"]
