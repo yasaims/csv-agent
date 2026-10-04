@@ -1,0 +1,10 @@
+[
+  {"id": "lookup_price", "question": "ポータブルSSDの価格はいくらですか?", "expected": ["15800"], "expected_tools": ["search_rows"]},
+  {"id": "lookup_description", "question": "4Kモニターは何インチですか?", "expected": ["32"], "expected_tools": ["search_rows"]},
+  {"id": "filter_out_of_stock", "question": "在庫が0の商品の名前を教えてください。", "expected": ["スマートスピーカー"], "expected_tools": ["filter_rows"]},
+  {"id": "filter_price_over", "question": "30000円より高い商品をすべて挙げてください。", "expected": ["27インチモニター", "4Kモニター"], "expected_tools": ["filter_rows"]},
+  {"id": "sum_stock_by_category", "question": "オーディオカテゴリの商品の在庫数の合計は?", "expected": ["20"], "expected_tools": ["aggregate"]},
+  {"id": "count_by_category", "question": "周辺機器カテゴリの商品は何件ありますか?", "expected": ["4"], "expected_tools": ["aggregate"]},
+  {"id": "max_price", "question": "最も高い商品の価格はいくらですか?", "expected": ["54800"], "expected_tools": ["aggregate"]},
+  {"id": "avg_price_storage", "question": "ストレージカテゴリの平均価格は?", "expected": ["9890"], "expected_tools": ["aggregate"]}
+]

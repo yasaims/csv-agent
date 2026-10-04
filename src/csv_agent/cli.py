@@ -3,6 +3,8 @@ import sys
 from collections.abc import Sequence
 from typing import Any
 
+import ollama
+
 from csv_agent.agent import DEFAULT_MODEL, AgentStepLimitError, ChatClient, CsvAgent
 from csv_agent.table import Table
 
@@ -35,7 +37,7 @@ def _interactive(agent: CsvAgent) -> None:
             continue
         try:
             print(agent.ask(question))
-        except AgentStepLimitError as e:
+        except (AgentStepLimitError, ollama.ResponseError) as e:
             print(e, file=sys.stderr)
 
 
@@ -59,7 +61,7 @@ def main(argv: Sequence[str] | None = None, client: ChatClient | None = None) ->
             print(agent.ask(args.question))
         else:
             _interactive(agent)
-    except (ConnectionError, AgentStepLimitError) as e:
+    except (ConnectionError, AgentStepLimitError, ollama.ResponseError) as e:
         print(f"Error: {e}", file=sys.stderr)
         return 1
     return 0

@@ -1,0 +1,27 @@
+# Reports whether an evaluation was recorded for the PR's code and whether accuracy regressed.
+# Evaluations need a local Ollama, so this job only reads committed records and never blocks the PR.
+name: eval-check
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  eval-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The PR head, not the merge commit: records are fingerprinted against the code the author evaluated.
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v6
+      - name: Read the target branch baseline
+        run: |
+          git show "origin/${{ github.base_ref }}:evals/records/baseline.json" > "$RUNNER_TEMP/base-baseline.json" 2>/dev/null \
+            || echo '{}' > "$RUNNER_TEMP/base-baseline.json"
+      - name: Check evaluation records
+        continue-on-error: true
+        run: uv run csv-agent-eval-check --base-baseline "$RUNNER_TEMP/base-baseline.json" --summary "$GITHUB_STEP_SUMMARY"

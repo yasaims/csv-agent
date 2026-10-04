@@ -1,6 +1,7 @@
 import io
 from pathlib import Path
 
+import ollama
 import pytest
 
 from csv_agent.cli import main
@@ -63,3 +64,22 @@ def test_unreachable_ollama_returns_error_code(csv_path: Path, capsys: pytest.Ca
 
     assert exit_code == 1
     assert "refused" in capsys.readouterr().err
+
+
+def test_ollama_server_error_returns_error_code(csv_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    exit_code = main([str(csv_path), "q"], client=ScriptedClient(ollama.ResponseError("bad tool call", 500)))
+
+    assert exit_code == 1
+    assert "bad tool call" in capsys.readouterr().err
+
+
+def test_interactive_session_continues_after_ollama_server_error(
+    csv_path: Path, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr("sys.stdin", io.StringIO("一つ目\n二つ目\n"))
+    client = ScriptedClient(ollama.ResponseError("bad tool call", 500), answer("回答2"))
+
+    exit_code = main([str(csv_path)], client=client)
+
+    assert exit_code == 0
+    assert "回答2" in capsys.readouterr().out

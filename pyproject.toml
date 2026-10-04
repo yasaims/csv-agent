@@ -23,6 +23,8 @@ dev = [
 
 [project.scripts]
 csv-agent = "csv_agent.cli:main"
+csv-agent-eval = "csv_agent.evaluation:main"
+csv-agent-eval-check = "csv_agent.eval_records:check_main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
