@@ -53,10 +53,8 @@ body {
 .new-chat,
 .panel,
 .topbar,
-.bubble,
 .composer textarea,
-.composer button,
-.speech {
+.composer button {
   box-shadow:
     0 calc(-1 * var(--px)) 0 0 var(--line),
     0 var(--px) 0 0 var(--line),
@@ -353,17 +351,19 @@ td.ev-cell {
 .speech {
   position: relative;
   flex: 1;
-  margin-left: 8px;
+  margin: 0 12px 0 8px;
   padding: 8px 12px;
   color: #0a2010;
   background: var(--bubble-agent);
+  border: var(--px) solid var(--line);
+  border-radius: 14px;
 }
 .speech::before {
   content: "";
   position: absolute;
-  left: -8px;
+  left: -12px;
   top: 50%;
-  width: 8px;
+  width: 12px;
   height: 8px;
   margin-top: -4px;
   background: var(--bubble-agent);
@@ -445,7 +445,8 @@ td.ev-cell {
 
 .bubble {
   position: relative;
-  margin: var(--px);
+  border: var(--px) solid var(--line);
+  border-radius: 14px;
   padding: 8px 12px;
   white-space: pre-wrap;
   word-break: break-word;

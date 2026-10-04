@@ -2,91 +2,167 @@
 
 // ---------- pixel sprites ----------
 
-const FACE_BASE = [
-  "....oooooooo....",
-  "..oohhhfffffoo..",
-  ".ohhffffffffffo.",
-  ".ohffffffffffso.",
-  "ohffffffffffffso",
-  "offfffffffffffso",
-  "offfffffffffffso",
-  "offfffffffffffso",
-  "offfffffffffffso",
-  "offfffffffffffso",
-  "offfffffffffffso",
-  "offfffffffffffso",
-  ".offfffffffffso.",
-  ".osfffffffffsso.",
-  "..oossssssssoo..",
-  "....oooooooo....",
-];
-
-const PALETTE = {
-  o: "#031008",
-  f: "#5fc46a",
-  s: "#3a9a4a",
-  h: "#b8f2a0",
-  e: "#031008",
-  w: "#ffffff",
-  m: "#031008",
-  b: "#f28a9a",
-};
-const ERROR_PALETTE = { ...PALETTE, f: "#9fb894", s: "#6f8a66", h: "#d4e3cc" };
-
-// Each feature is [x, y, rows]; "." leaves the base pixel as is.
-const EYE = ["we", "ee", "ee"];
-const FACES = {
+// Each sprite is a 20x20 grid; "." is transparent.
+const SPRITES = {
   idle: [
-    [4, 5, EYE],
-    [10, 5, EYE],
-    [7, 10, ["mm"]],
+    "...o.......o...ohsoo",
+    "..ofo.....ofo.ohttts",
+    "..ofo.....ofoohtttts",
+    "..ofpooooopfohttttso",
+    "..ofohfffsoootttttso",
+    "..oohffffffsoottttso",
+    "..ohffffffffsottttso",
+    ".ohfweffffwesottttso",
+    ".offeeffffeesottttts",
+    ".osfffceecffsottttts",
+    "..osfccccccsoottttts",
+    "...osccckcso.ottttts",
+    "....ooskkkosohttttso",
+    "...ohfhaaahsotttttso",
+    "...offoaaaofsottttso",
+    "...offcoaocfsottttso",
+    "...oooccccoootttsso.",
+    "..ohhhoccohhhotsoo..",
+    "..oshshocohshsoo....",
+    "...oooooooooooo.....",
   ],
   blink: [
-    [4, 7, ["ee"]],
-    [10, 7, ["ee"]],
-    [7, 10, ["mm"]],
+    "...o.......o...ohsoo",
+    "..ofo.....ofo.ohttts",
+    "..ofo.....ofoohtttts",
+    "..ofpooooopfohttttso",
+    "..ofohfffsoootttttso",
+    "..oohffffffsoottttso",
+    "..ohffffffffsottttso",
+    ".ohfffffffffsottttso",
+    ".offeeffffeesottttts",
+    ".osfffceecffsottttts",
+    "..osfccccccsoottttts",
+    "...osccckcso.ottttts",
+    "....ooskkkosohttttso",
+    "...ohfhaaahsotttttso",
+    "...offoaaaofsottttso",
+    "...offcoaocfsottttso",
+    "...oooccccoootttsso.",
+    "..ohhhoccohhhotsoo..",
+    "..oshshocohshsoo....",
+    "...oooooooooooo.....",
   ],
   thinking: [
-    [5, 4, ["we", "ee"]],
-    [11, 4, ["we", "ee"]],
-    [9, 10, ["mm"]],
+    "...o.......o...ohsoo",
+    "w.ofo.....ofo.ohttts",
+    "..ofo.....ofoohtttts",
+    "w.ofpooooopfohttttso",
+    "..ofohfffsoootttttso",
+    "..oohffffffsoottttso",
+    "..ohffffffffsottttso",
+    ".ohffewffffewottttso",
+    ".offffffffffsottttts",
+    ".osfffceecffsottttts",
+    "..osfccccccsoottttts",
+    "...osccckcso.ottttts",
+    "....ooskkkosohttttso",
+    "...ohfhaaahsotttttso",
+    "...offoaaaofsottttso",
+    "...offcoaocfsottttso",
+    "...oooccccoootttsso.",
+    "..ohhhoccohhhotsoo..",
+    "..oshshocohshsoo....",
+    "...oooooooooooo.....",
   ],
   searching: [
-    [3, 5, ["wwe", "wee", "eee"]],
-    [10, 5, ["wwe", "wee", "eee"]],
-    [7, 10, ["mm", "mm"]],
+    "...o.......o.....ooo",
+    "..ofo.....ofo...ohts",
+    "..ofo.....ofo..ohtts",
+    "..ofpooooopfo..ottts",
+    "..ofohfffsooo.ohttts",
+    "..oohffffffsoootttts",
+    "..ohffffffffsootttts",
+    ".ohewffffewfsootttts",
+    ".ofeeffffeefsohtttts",
+    ".osfffceecffsottttts",
+    "..osfccccccsoottttts",
+    "...osccckcso.ottttts",
+    "....ooskkkosoottttts",
+    "...ohfhaaahsohttttts",
+    "...offoaaaofsottttso",
+    "...offcoaocfsottttso",
+    "...oooccccoootttsso.",
+    "..ohhhoccohhhotsoo..",
+    "..oshshocohshsoo....",
+    "...oooooooooooo.....",
   ],
   happy: [
-    [3, 6, [".e.", "e.e"]],
-    [10, 6, [".e.", "e.e"]],
-    [5, 10, ["m....m", ".mmmm."]],
-    [2, 9, ["bb"]],
-    [12, 9, ["bb"]],
+    "..ofo.....ofotttso..",
+    "..ofo.....ofottttso.",
+    "..ofpooooopfottttso.",
+    "..ofohfffsooottttso.",
+    "..oohffffffsoottttso",
+    "..ohffffffffsottttso",
+    ".ohfeffffffesottttso",
+    ".ofefeffffefeottttso",
+    ".osbbfceecfbbottttso",
+    "..osfccccccsotttttso",
+    "...osccckcsootttttso",
+    ".y..ooskkkosotttttso",
+    "yyyohfhaaahsotttttso",
+    ".y.offoaaaofsotttso.",
+    "...offcoaocfsottso..",
+    "...oooccccooottso...",
+    "..ohhhoccohhhoso....",
+    "..oshshocohshso.....",
+    "...ooooooooooo......",
+    "....................",
   ],
   error: [
-    [3, 5, ["e.e", ".e.", "e.e"]],
-    [10, 5, ["e.e", ".e.", "e.e"]],
-    [5, 10, [".mmmm.", "m....m"]],
+    "....................",
+    "....................",
+    ".o............o.....",
+    "ofoo.ooooo..oofo....",
+    "offfohfffsooffo.....",
+    "offohffffffsodo.....",
+    ".ooefeffffefedo.....",
+    ".ohfeffffffeso......",
+    ".ofefeffffefeo......",
+    ".osfffceecffso......",
+    "..osfccccccso.......",
+    "...oscccccso........",
+    "....oosccooso.....o.",
+    "...ohfooocfso....oso",
+    "...offcccccfsoooohso",
+    "...offcccccfsottttso",
+    "..koooccccoootttttso",
+    ".kkkhhoccohhhottttso",
+    ".aaahshocohshsotsso.",
+    "..aoooooooooooosoo..",
   ],
+};
+
+const PALETTE = {
+  a: "#9a6630", // acorn
+  b: "#f28a9a", // blush
+  c: "#fbe8c8", // cream
+  d: "#7bcfe7", // sweat
+  e: "#1a0d05", // eye
+  f: "#d9822b", // fur
+  h: "#f2b766", // fur highlight
+  k: "#5a3418", // acorn cap
+  o: "#2a1408", // outline
+  p: "#f2a0a0", // inner ear
+  s: "#a85a1c", // fur shade
+  t: "#e89a45", // tail
+  w: "#ffffff", // white
+  y: "#ffe27a", // sparkle
 };
 
 function faceSvg(state) {
-  const grid = FACE_BASE.map((row) => row.split(""));
-  for (const [x0, y0, rows] of FACES[state]) {
-    rows.forEach((row, dy) =>
-      [...row].forEach((ch, dx) => {
-        if (ch !== ".") grid[y0 + dy][x0 + dx] = ch;
-      }),
-    );
-  }
-  const palette = state === "error" ? ERROR_PALETTE : PALETTE;
   let rects = "";
-  grid.forEach((row, y) =>
-    row.forEach((ch, x) => {
-      if (ch !== ".") rects += `<rect x="${x}" y="${y}" width="1" height="1" fill="${palette[ch]}"/>`;
+  SPRITES[state].forEach((row, y) =>
+    [...row].forEach((ch, x) => {
+      if (ch !== ".") rects += `<rect x="${x}" y="${y}" width="1" height="1" fill="${PALETTE[ch]}"/>`;
     }),
   );
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">${rects}</svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">${rects}</svg>`;
 }
 
 // ---------- DOM ----------
