@@ -1,0 +1,24 @@
+{
+  "qwen3.5:9b": {
+    "accuracy": 0.875,
+    "passed": 21,
+    "total": 24,
+    "cases_hash": "bbb63bfab057273ea5540b36e5d12772c4ad878737e4d875edd803dbb3c7e929",
+    "fingerprint": "4f2236e09e06e2452299f895f8193e8a6ebb03e7badcf8437fb2620b0d57c70d",
+    "recorded_at": "2026-10-04T09:32:14Z",
+    "run": "20261004T093214594611Z_4f2236e0",
+    "source": "initial",
+    "reason": null
+  },
+  "qwen3.5:4b": {
+    "accuracy": 1.0,
+    "passed": 24,
+    "total": 24,
+    "cases_hash": "bbb63bfab057273ea5540b36e5d12772c4ad878737e4d875edd803dbb3c7e929",
+    "fingerprint": "4f2236e09e06e2452299f895f8193e8a6ebb03e7badcf8437fb2620b0d57c70d",
+    "recorded_at": "2026-10-04T09:32:14Z",
+    "run": "20261004T093214594611Z_4f2236e0",
+    "source": "initial",
+    "reason": null
+  }
+}
