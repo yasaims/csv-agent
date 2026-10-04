@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CSV AGENT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1 class="logo">CSV<span>AGENT</span></h1>
+      <div class="model" id="model">MODEL: -</div>
+      <div class="ctx" title="コンテキストウィンドウ使用量">
+        <span class="ctx-label">CTX</span>
+        <div class="ctx-bar" id="ctx-bar"></div>
+        <span class="ctx-value" id="ctx-value">0</span>
+      </div>
+      <button type="button" class="new-chat" id="new-chat" title="会話をリセット">NEW</button>
+    </header>
+
+    <main class="layout">
+      <section class="panel table-panel">
+        <div class="panel-title">
+          <span>▼ DATA</span>
+          <span class="legend"><i class="sw sw-row"></i>根拠の行 <i class="sw sw-cell"></i>根拠のセル</span>
+        </div>
+        <div class="table-scroll" id="table-scroll">
+          <table id="csv-table">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div
+        class="splitter"
+        id="splitter"
+        role="separator"
+        tabindex="0"
+        aria-label="表とチャットの境界 (ドラッグ / 矢印キーでサイズ変更、ダブルクリックで初期化)"
+      ></div>
+
+      <section class="panel chat-panel">
+        <div class="agent-status">
+          <div class="face" id="face"></div>
+          <div class="speech" id="status-text">なんでも聞いてね!</div>
+        </div>
+        <div class="chat-log" id="chat-log"></div>
+        <form class="composer" id="composer">
+          <textarea id="input" rows="1" placeholder="しつもんを入力"></textarea>
+          <button type="submit" id="send">送信</button>
+        </form>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

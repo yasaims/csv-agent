@@ -98,7 +98,10 @@ class CsvTools:
         return _to_json([self._numbered_row(i) for i in indices])
 
     def filter_rows(self, column: str, operator: str, value: str, limit: int = 20) -> str:
-        """Return all rows whose column satisfies a condition. Numbers are compared numerically.
+        """Return all rows whose column satisfies a condition.
+
+        >, >=, <, <= compare numbers (commas ignored, empty cells skipped). ==, != and contains compare text:
+        == and != are exact and case-sensitive, contains is case-insensitive.
 
         Args:
             column: Column to test.

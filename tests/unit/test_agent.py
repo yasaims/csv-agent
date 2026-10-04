@@ -89,3 +89,33 @@ def test_follow_up_question_keeps_previous_turns() -> None:
 
     contents = [m["content"] for m in client.requests[1]["messages"]]
     assert contents[-3:] == ["安い商品は?", "マウスです", "その価格は?"]
+
+
+def test_context_tokens_is_zero_before_any_question() -> None:
+    assert CsvAgent(TABLE, client=ScriptedClient()).context_tokens == 0
+
+
+def test_context_tokens_reflects_last_response_token_counts() -> None:
+    first = tool_call("get_schema", {})
+    first.prompt_eval_count, first.eval_count = 100, 10
+    last = answer("ok")
+    last.prompt_eval_count, last.eval_count = 150, 20
+    agent = CsvAgent(TABLE, client=ScriptedClient(first, last))
+
+    agent.ask("質問")
+
+    assert agent.context_tokens == 170
+
+
+def test_reset_clears_history_and_context_tokens() -> None:
+    first = answer("ok")
+    first.prompt_eval_count = 100
+    client = ScriptedClient(first, answer("ok"))
+    agent = CsvAgent(TABLE, client=client)
+    agent.ask("一つ目")
+
+    agent.reset()
+
+    assert agent.context_tokens == 0
+    agent.ask("二つ目")
+    assert [m["role"] for m in client.requests[1]["messages"]] == ["system", "user"]
