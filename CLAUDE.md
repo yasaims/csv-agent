@@ -15,14 +15,15 @@ uv run csv-agent data/products.csv "..." -v --model qwen3.5:4b --think
 uv run pytest                                        # unit tests only (ollama marker excluded by default)
 uv run pytest -m ollama                              # end-to-end tests against a running local Ollama
 uv run pytest tests/unit/test_tools.py::test_name    # single test
-uv run csv-agent-eval data/products.csv evals/products.json --models qwen3.5:9b qwen3.5:4b --repeats 3 -o results.jsonl
-uv run csv-agent-eval data/products.csv evals/products.json --models qwen3.5:9b --repeats 3 --record   # save to evals/records/
+uv run csv-agent-eval data/products.csv evals/products.json --models qwen3.5:9b qwen3.5:4b -o results.jsonl
+uv run csv-agent-eval data/products.csv evals/products.json --models qwen3.5:9b --record   # save to evals/records/
 uv run csv-agent-eval ... --reset-baseline "reason"   # make this run the baseline of the evaluated models
 uv run csv-agent-eval-check                            # what the PR workflow reports
 ```
 
 ## Evaluation records
 
+- **Before creating a pull request, use the `evaluate-before-pr` skill** (`.claude/skills/evaluate-before-pr/`).
 - Runs are committed under `evals/records/runs/` and matched to code by a fingerprint of `src/`, `data/`, `evals/` (minus records) and `uv.lock`, CRLF-normalized. Edits elsewhere (tests, docs, CI) don't require re-evaluation.
 - `evals/records/baseline.json` holds one baseline per model, written only when a model has none or on `--reset-baseline`.
 - `.github/workflows/eval-check.yml` runs `csv-agent-eval-check` on PRs: reports missing evaluation, regressions beyond 5 pt, and baseline changes vs the target branch. It never fails the PR.

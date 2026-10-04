@@ -51,15 +51,15 @@ def test_main_runs_every_model_and_writes_jsonl(table: Table, tmp_path: Path) ->
     cases_path = tmp_path / "cases.json"
     cases_path.write_text(json.dumps([{"id": "c", "question": "q", "expected": ["2980"]}]), encoding="utf-8")
     output = tmp_path / "out.jsonl"
-    client = ScriptedClient(answer("2980"), answer("2980"), answer("x"), answer("x"))
+    client = ScriptedClient(*[answer("2980")] * 3, *[answer("x")] * 3)
 
     exit_code = main(
-        [str(csv_path), str(cases_path), "--models", "a", "b", "--repeats", "2", "-o", str(output)], client=client
+        [str(csv_path), str(cases_path), "--models", "a", "b", "-o", str(output)], client=client
     )
 
     records = [json.loads(line) for line in output.read_text(encoding="utf-8").splitlines()]
     assert exit_code == 0
-    assert [(r["model"], r["passed"]) for r in records] == [("a", True), ("a", True), ("b", False), ("b", False)]
+    assert [(r["model"], r["passed"]) for r in records] == [("a", True)] * 3 + [("b", False)] * 3
 
 
 def test_record_saves_run_and_registers_then_resets_baseline(
@@ -70,8 +70,8 @@ def test_record_saves_run_and_registers_then_resets_baseline(
     Path("cases.json").write_text(json.dumps([{"id": "c", "question": "q", "expected": ["2980"]}]), encoding="utf-8")
     args = ["data.csv", "cases.json", "--models", "a"]
 
-    assert main([*args, "--record"], client=ScriptedClient(answer("2980"))) == 0
-    assert main([*args, "--reset-baseline", "new rules"], client=ScriptedClient(answer("x"))) == 0
+    assert main([*args, "--record"], client=ScriptedClient(*[answer("2980")] * 3)) == 0
+    assert main([*args, "--reset-baseline", "new rules"], client=ScriptedClient(*[answer("x")] * 3)) == 0
 
     baseline = json.loads(Path("evals/records/baseline.json").read_text(encoding="utf-8"))
     assert len(list(Path("evals/records/runs").glob("*.json"))) == 2
@@ -88,7 +88,7 @@ def test_record_refuses_when_every_run_of_a_model_failed(
 
     exit_code = main(
         ["data.csv", "cases.json", "--models", "a", "--record"],
-        client=ScriptedClient(ollama.ResponseError("down", 500)),
+        client=ScriptedClient(*[ollama.ResponseError("down", 500)] * 3),
     )
 
     assert exit_code == 1

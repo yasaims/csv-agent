@@ -1,0 +1,655 @@
+{
+  "recorded_at": "2026-10-04T09:43:33Z",
+  "fingerprint": "6fe74e2e17fbd515370808a844267021e0a14444e798aee38db23185a7199ce3",
+  "git_head": "b3f6cb858ee575c833b0cf96f96309f5659dc791",
+  "cases_hash": "bbb63bfab057273ea5540b36e5d12772c4ad878737e4d875edd803dbb3c7e929",
+  "csv": "data/products.csv",
+  "cases": "evals/products.json",
+  "repeats": 3,
+  "think": false,
+  "models": {
+    "qwen3.5:9b": {
+      "passed": 20,
+      "total": 24,
+      "accuracy": 0.8333333333333334,
+      "tool_ok": 18,
+      "errors": 0,
+      "avg_seconds": 1.4818110999998073,
+      "avg_tools": 1.0
+    },
+    "qwen3.5:4b": {
+      "passed": 24,
+      "total": 24,
+      "accuracy": 1.0,
+      "tool_ok": 24,
+      "errors": 0,
+      "avg_seconds": 0.9441521708328461,
+      "avg_tools": 1.0
+    }
+  },
+  "results": [
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "lookup_price",
+      "run": 0,
+      "passed": true,
+      "answer": "検索結果によると、**ポータブルSSD 1TB**という製品の価格が以下の通りです：\n\n- **価格**: 15,800円 (row: 6)\n\nこれが唯一見つかったポータブルSSDの製品情報です。",
+      "error": null,
+      "seconds": 5.474635700000363,
+      "tools_called": [
+        "search_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "lookup_price",
+      "run": 1,
+      "passed": true,
+      "answer": "ポータブルSSDは以下の通りです:\n\n- **名前**: ポータブルSSD 1TB\n- **価格**: 15,800円\n\nこれが CSV に登録されている唯一のポータブルSSD の価格情報です。",
+      "error": null,
+      "seconds": 1.1774125999982061,
+      "tools_called": [
+        "search_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "lookup_price",
+      "run": 2,
+      "passed": true,
+      "answer": "ポータブルSSD（row 6）の価格は **15,800円** です。\n\n- **製品名**: ポータブルSSD 1TB\n- **価格**: 15,800円\n- **カテゴリ**: ストレージ\n- **在庫**: 45個\n- **特徴**: USB 3.2 Gen2対応で最大1050MB/sの読み込み速度",
+      "error": null,
+      "seconds": 1.5125896999998076,
+      "tools_called": [
+        "search_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "lookup_description",
+      "run": 0,
+      "passed": true,
+      "answer": "検索結果から、row 9 の「4Kモニター」に関する情報が見つかりました。\n\nこのモニターの説明によると：\n- **サイズ**: 32インチ\n- **名乗記**: 4K UHDモニター\n\nしたがって、**4Kモニターは32インチ**です。",
+      "error": null,
+      "seconds": 1.3395290999978897,
+      "tools_called": [
+        "search_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "lookup_description",
+      "run": 1,
+      "passed": true,
+      "answer": "検索結果によると、row 9にある「4Kモニター」は**32インチ**です。",
+      "error": null,
+      "seconds": 0.8378348000005644,
+      "tools_called": [
+        "search_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "lookup_description",
+      "run": 2,
+      "passed": true,
+      "answer": "データによると、**「4Kモニター」**は **row 9** にあり、そのサイズは **32インチ** です。",
+      "error": null,
+      "seconds": 0.9407016999975895,
+      "tools_called": [
+        "search_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "filter_out_of_stock",
+      "run": 0,
+      "passed": true,
+      "answer": "在庫が 0 の商品は以下の 1 つです:\n\n- **名**: スマートスピーカー (行番号: 8)",
+      "error": null,
+      "seconds": 1.383032900001126,
+      "tools_called": [
+        "filter_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "filter_out_of_stock",
+      "run": 1,
+      "passed": true,
+      "answer": "在庫が 0 の商品名は「スマートスピーカー」です（行番号：8）。",
+      "error": null,
+      "seconds": 0.9352733000014268,
+      "tools_called": [
+        "filter_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "filter_out_of_stock",
+      "run": 2,
+      "passed": true,
+      "answer": "在庫が0の商品は以下の通りです：\n\n- 行番号：8\n- 商品名：**スマートスピーカー**",
+      "error": null,
+      "seconds": 0.9577084999982617,
+      "tools_called": [
+        "filter_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "filter_price_over",
+      "run": 0,
+      "passed": false,
+      "answer": "30000円より高い商品は以下の 2 つです：\n\n- **27 インチモニター**（行番号 3）：価格 32,800 円、カテゴリ：ディスプレイ\n- **4K モニター**（行番号 9）：価格 54,800 円、カテゴリ：ディスプレイ",
+      "error": null,
+      "seconds": 1.592951800001174,
+      "tools_called": [
+        "filter_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "filter_price_over",
+      "run": 1,
+      "passed": false,
+      "answer": "30000円より高い商品は以下の 2 商品です:\n\n**行番号: 3**\n- **名称:** 27 インチモニター\n- **カテゴリ:** ディスプレイ\n- **価格:** 32,800 円\n- **在庫:** 12\n- **説明:** WQHD 解像度で IPS パネルを搭載\n\n**行番号: 9**\n- **名称:** 4K モニター\n- **カテゴリ:** ディスプレイ\n- **価格:** 54,800 円\n- **在庫:** 5\n- **説明:** 32 インチの 4K UHD モニターで HDR10 に対応",
+      "error": null,
+      "seconds": 2.2864999000012176,
+      "tools_called": [
+        "filter_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "filter_price_over",
+      "run": 2,
+      "passed": false,
+      "answer": "30,000円より高い商品は以下の 2 点です：\n\n- **27 インチモニター** (row: 3) - 価格：32,800 円、カテゴリ：ディスプレイ、在庫：12\n- **4K モニター** (row: 9) - 価格：54,800 円、カテゴリ：ディスプレイ、在庫：5",
+      "error": null,
+      "seconds": 1.6155685000012454,
+      "tools_called": [
+        "filter_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "sum_stock_by_category",
+      "run": 0,
+      "passed": true,
+      "answer": "オーディオカテゴリの商品には以下の2つがあります：\n- 行5: ノイズキャンセリングヘッドホン - 在庫20個\n- 行8: スマートスピーカー - 在庫0個\n\nこれらの在庫数の合計は：20 + 0 = 20個です。",
+      "error": null,
+      "seconds": 1.5963617000015802,
+      "tools_called": [
+        "filter_rows"
+      ],
+      "used_expected_tools": false
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "sum_stock_by_category",
+      "run": 1,
+      "passed": true,
+      "answer": "オーディオカテゴリの商品は 2 件見つかりました：\n\n- Row 5: ノイズキャンセリングヘッドホン - 在庫 20\n- Row 8: スマートスピーカー - 在庫 0\n\nこれらの在庫数の合計は 20 + 0 = **20** です。",
+      "error": null,
+      "seconds": 1.6745517999988806,
+      "tools_called": [
+        "filter_rows"
+      ],
+      "used_expected_tools": false
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "sum_stock_by_category",
+      "run": 2,
+      "passed": true,
+      "answer": "オーディオカテゴリの商品の在庫数の合計は **20** です。",
+      "error": null,
+      "seconds": 1.0545831000017643,
+      "tools_called": [
+        "aggregate"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "count_by_category",
+      "run": 0,
+      "passed": true,
+      "answer": "「周辺機器」カテゴリの商品は 4 件あります。\n\n該当する商品は以下の通りです：\n1. ワイヤレスマウス（行番号 1）\n2. メカニカルキーボード（行番号 2）\n3. USB-Cハブ（行番号 4）\n4. Webカメラ（行番号 7）",
+      "error": null,
+      "seconds": 1.6440795000016806,
+      "tools_called": [
+        "filter_rows"
+      ],
+      "used_expected_tools": false
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "count_by_category",
+      "run": 1,
+      "passed": true,
+      "answer": "周辺機器カテゴリの商品は 4 件あります（ID 1, 2, 4, 7）。",
+      "error": null,
+      "seconds": 1.0218947999965167,
+      "tools_called": [
+        "filter_rows"
+      ],
+      "used_expected_tools": false
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "count_by_category",
+      "run": 2,
+      "passed": true,
+      "answer": "周辺機器カテゴリの商品は**4件**あります。\n\n該当する商品:\n- 行1: ワイヤレスマウス\n- 行2: メカニカルキーボード\n- 行4: USB-Cハブ\n- 行7: Webカメラ",
+      "error": null,
+      "seconds": 1.3337748999983887,
+      "tools_called": [
+        "filter_rows"
+      ],
+      "used_expected_tools": false
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "max_price",
+      "run": 0,
+      "passed": true,
+      "answer": "最も高い商品の価格は **54,800 円** です。\n\nこれは「4K ディスプレイ」で、9 行目のデータに該当します。",
+      "error": null,
+      "seconds": 2.5231600000006438,
+      "tools_called": [
+        "aggregate",
+        "aggregate"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "max_price",
+      "run": 1,
+      "passed": true,
+      "answer": "最も高い商品の価格は54,800円です。これは「4Kモニター」で、ディスプレイカテゴリに分類されています（行9）。",
+      "error": null,
+      "seconds": 0.9853956000006292,
+      "tools_called": [
+        "aggregate"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "max_price",
+      "run": 2,
+      "passed": false,
+      "answer": "スタックが0以下の商品（品切れ）の最高価格は8,000円です。",
+      "error": null,
+      "seconds": 0.26125949999914155,
+      "tools_called": [],
+      "used_expected_tools": false
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "avg_price_storage",
+      "run": 0,
+      "passed": true,
+      "answer": "ストレージカテゴリの平均価格は 9,890円です。",
+      "error": null,
+      "seconds": 1.0290328999981284,
+      "tools_called": [
+        "aggregate"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "avg_price_storage",
+      "run": 1,
+      "passed": true,
+      "answer": "「category」が「ストレージ」の行において、価格の平均は **9890** です。",
+      "error": null,
+      "seconds": 1.1580016000007163,
+      "tools_called": [
+        "aggregate"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:9b",
+      "case_id": "avg_price_storage",
+      "run": 2,
+      "passed": true,
+      "answer": "「ストレージ」カテゴリの平均価格は **9890円** です（該当する行は 2 件）。",
+      "error": null,
+      "seconds": 1.2276324999984354,
+      "tools_called": [
+        "aggregate"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "lookup_price",
+      "run": 0,
+      "passed": true,
+      "answer": "ポータブルSSD 1TBの価格は15,800円です。",
+      "error": null,
+      "seconds": 3.9128473000018857,
+      "tools_called": [
+        "search_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "lookup_price",
+      "run": 1,
+      "passed": true,
+      "answer": "ポータブルSSDの価格は15,800円です。",
+      "error": null,
+      "seconds": 0.646837799999048,
+      "tools_called": [
+        "search_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "lookup_price",
+      "run": 2,
+      "passed": true,
+      "answer": "ポータブルSSD 1TBの価格は15,800円です。",
+      "error": null,
+      "seconds": 0.5940377000006265,
+      "tools_called": [
+        "search_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "lookup_description",
+      "run": 0,
+      "passed": true,
+      "answer": "行9のデータによると、4Kモニターは32インチです。",
+      "error": null,
+      "seconds": 0.628370400001586,
+      "tools_called": [
+        "search_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "lookup_description",
+      "run": 1,
+      "passed": true,
+      "answer": "4Kモニターは、**32インチ**です。\n\n行番号9の「4Kモニター」の記述から「32インチの4K UHDモニター」とあるためです。",
+      "error": null,
+      "seconds": 0.7713194999996631,
+      "tools_called": [
+        "search_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "lookup_description",
+      "run": 2,
+      "passed": true,
+      "answer": "4K モニターは 32 インチです。",
+      "error": null,
+      "seconds": 0.5416672999999719,
+      "tools_called": [
+        "search_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "filter_out_of_stock",
+      "run": 0,
+      "passed": true,
+      "answer": "在庫が0の商品は「スマートスピーカー」のみです。",
+      "error": null,
+      "seconds": 0.9442037000007986,
+      "tools_called": [
+        "filter_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "filter_out_of_stock",
+      "run": 1,
+      "passed": true,
+      "answer": "在庫が0の商品の名前は「スマートスピーカー」です。",
+      "error": null,
+      "seconds": 0.6772057999987737,
+      "tools_called": [
+        "filter_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "filter_out_of_stock",
+      "run": 2,
+      "passed": true,
+      "answer": "在庫が0の商品は「スマートスピーカー」のみです。",
+      "error": null,
+      "seconds": 0.706787399998575,
+      "tools_called": [
+        "filter_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "filter_price_over",
+      "run": 0,
+      "passed": true,
+      "answer": "30,000円より高い商品は以下の通りです。\n\n- **27インチモニター**（価格：32,800円）：ディスプレイカテゴリで、WQHD解像度とIPSパネルを搭載した商品です。在庫は12件です。\n- **4Kモニター**（価格：54,800円）：ディスプレイカテゴリで、32インチの4K UHDモニターでHDR10に対応しています。在庫は5件です。",
+      "error": null,
+      "seconds": 1.3552294000000984,
+      "tools_called": [
+        "filter_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "filter_price_over",
+      "run": 1,
+      "passed": true,
+      "answer": "3万円以上の商品は以下の2件です：\n\n- **27インチモニター** (価格: 32,800円)\n  - カテゴリ: ディスプレイ\n  - 在庫数: 12\n  - 説明: WQHD解像度でIPSパネルを搭載\n\n- **4Kモニター** (価格: 54,800円)\n  - カテゴリ: ディスプレイ\n  - 在庫数: 5\n  - 説明: 32インチの4K UHDモニターでHDR10に対応",
+      "error": null,
+      "seconds": 1.3988804000000528,
+      "tools_called": [
+        "filter_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "filter_price_over",
+      "run": 2,
+      "passed": true,
+      "answer": "30000円より高い商品はいずれか 2 つです。\n\n- **27インチモニター** (価格：32800円)\n- **4Kモニター** (価格：54800円)",
+      "error": null,
+      "seconds": 0.9505286999992677,
+      "tools_called": [
+        "filter_rows"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "sum_stock_by_category",
+      "run": 0,
+      "passed": true,
+      "answer": "オーディオカテゴリの商品の在庫数の合計は、20 です。該当する商品は2つあります（行番号3と4）。",
+      "error": null,
+      "seconds": 0.9121726999983366,
+      "tools_called": [
+        "aggregate"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "sum_stock_by_category",
+      "run": 1,
+      "passed": true,
+      "answer": "オーディオカテゴリの商品の在庫数は合計 **20** です。\n（該当行は2件）",
+      "error": null,
+      "seconds": 0.8139138999977149,
+      "tools_called": [
+        "aggregate"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "sum_stock_by_category",
+      "run": 2,
+      "passed": true,
+      "answer": "オーディオカテゴリの商品の在庫数の合計は、**20**です。\n\n（該当する商品が2行と一致しました）",
+      "error": null,
+      "seconds": 0.7918549999994866,
+      "tools_called": [
+        "aggregate"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "count_by_category",
+      "run": 0,
+      "passed": true,
+      "answer": "周辺機器カテゴリの商品は4件あります。",
+      "error": null,
+      "seconds": 0.7573503999992681,
+      "tools_called": [
+        "aggregate"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "count_by_category",
+      "run": 1,
+      "passed": true,
+      "answer": "周辺機器カテゴリの商品は、データに存在する10件のうち**4件**です。",
+      "error": null,
+      "seconds": 0.721359899998788,
+      "tools_called": [
+        "aggregate"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "count_by_category",
+      "run": 2,
+      "passed": true,
+      "answer": "周辺機器カテゴリの商品は4件あります。",
+      "error": null,
+      "seconds": 0.6689387000005809,
+      "tools_called": [
+        "aggregate"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "max_price",
+      "run": 0,
+      "passed": true,
+      "answer": "最も高い商品の価格は 54,800円です。商品名は「4Kモニター」で、ディスプレイのカテゴリに入ります。",
+      "error": null,
+      "seconds": 0.8780857999990985,
+      "tools_called": [
+        "aggregate"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "max_price",
+      "run": 1,
+      "passed": true,
+      "answer": "最も高い商品価格は **54,800円** です。これは「4Kモニター」という商品です。",
+      "error": null,
+      "seconds": 0.8573075999993307,
+      "tools_called": [
+        "aggregate"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "max_price",
+      "run": 2,
+      "passed": true,
+      "answer": "最も高い商品の価格は 54,800 円です。\n\n(行番号：9,商品名：4Kモニター)",
+      "error": null,
+      "seconds": 0.7033723999993526,
+      "tools_called": [
+        "aggregate"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "avg_price_storage",
+      "run": 0,
+      "passed": true,
+      "answer": "ストレージカテゴリの平均価格は 9,890 円です。\n\n参考：この計算に基づいた行は 2 件でした。",
+      "error": null,
+      "seconds": 0.8544798999973864,
+      "tools_called": [
+        "aggregate"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "avg_price_storage",
+      "run": 1,
+      "passed": true,
+      "answer": "ストレージカテゴリの平均価格は9,890円です。\n\n該当行：\n- 10140 SSD 1TB (価格:14560円)\n- 10234 HDD 2TB (価格:5220円)",
+      "error": null,
+      "seconds": 0.9295772000004945,
+      "tools_called": [
+        "aggregate"
+      ],
+      "used_expected_tools": true
+    },
+    {
+      "model": "qwen3.5:4b",
+      "case_id": "avg_price_storage",
+      "run": 2,
+      "passed": true,
+      "answer": "ストレージカテゴリの平均価格は9890円です。",
+      "error": null,
+      "seconds": 0.6433231999981217,
+      "tools_called": [
+        "aggregate"
+      ],
+      "used_expected_tools": true
+    }
+  ]
+}

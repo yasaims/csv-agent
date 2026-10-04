@@ -2,33 +2,6 @@
 
 A small sample AI agent that answers questions about **a single small CSV file**, using a local [Ollama](https://ollama.com) model (`qwen3.5:9b` by default).
 
-## How it works
-
-```mermaid
-flowchart LR
-    Q[Question] --> A[CsvAgent]
-    A <-->|tool calling| L[Ollama<br/>qwen3.5:9b]
-    A --> T[CsvTools]
-    T --> S[search_rows<br/>BM25 retrieval]
-    T --> F[filter_rows<br/>exact conditions]
-    T --> G[aggregate<br/>count/sum/mean/min/max]
-    T --> M[get_schema]
-    S & F & G & M --> C[(CSV in memory)]
-```
-
-- The CSV is loaded into memory. Each row becomes a `column: value | ...` document.
-- `search_rows` ranks rows with BM25 (`rank-bm25`). Text is NFKC-normalized; ASCII words are kept as words and Japanese runs are split into character bigrams, so no embedding model or Japanese tokenizer is required.
-- `filter_rows` and `aggregate` give exact answers for conditions and arithmetic, which keyword retrieval alone cannot.
-- The schema is placed in the system prompt; the model decides which tools to call and answers from their results, citing row numbers.
-
-| Module | Role |
-| --- | --- |
-| `table.py` | CSV loading (UTF-8 / UTF-8 with BOM) |
-| `retriever.py` | Tokenizer and BM25 retriever |
-| `tools.py` | Tools exposed to the model. Errors are returned as JSON so the model can retry |
-| `agent.py` | Tool-calling loop over the Ollama chat API, conversation history |
-| `cli.py` | Command line interface |
-
 ## Requirements
 
 - [uv](https://docs.astral.sh/uv/)
@@ -65,13 +38,13 @@ Thinking mode is off by default to keep responses fast.
 
 ```bash
 # Compare models on fixed questions
-uv run csv-agent-eval data/products.csv evals/products.json --models qwen3.5:9b qwen3.5:4b --repeats 3
+uv run csv-agent-eval data/products.csv evals/products.json --models qwen3.5:9b qwen3.5:4b
 
 # Record the run in the repository (evals/records/) so the PR check can see it
-uv run csv-agent-eval data/products.csv evals/products.json --models qwen3.5:9b --repeats 3 --record
+uv run csv-agent-eval data/products.csv evals/products.json --models qwen3.5:9b --record
 
 # Replace the evaluated models' baselines with this run, e.g. after changing evaluation cases
-uv run csv-agent-eval data/products.csv evals/products.json --models qwen3.5:9b --repeats 3 --reset-baseline "tightened expected keywords"
+uv run csv-agent-eval data/products.csv evals/products.json --models qwen3.5:9b --reset-baseline "tightened expected keywords"
 ```
 
 Before opening a PR, commit your code, run the evaluation with `--record`, and commit `evals/records/`.
