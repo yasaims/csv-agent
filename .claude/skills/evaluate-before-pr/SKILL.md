@@ -14,7 +14,8 @@ to the code by a fingerprint of `src/`, `data/`, `evals/` (except `evals/records
    `uv run csv-agent-eval-check` says "matches this code state". Go to step 7.
 2. Commit all code changes first. Any later edit inside the fingerprint scope invalidates the run.
 3. Confirm Ollama is running and the models exist: `ollama list`.
-4. Run the evaluation for every model in `evals/records/baseline.json` (each case runs 3 times; this takes minutes):
+4. Run the evaluation for every model listed as a key in `evals/records/baseline.json` (each case runs 3 times;
+   this takes minutes). For example, with `qwen3.5:9b` and `qwen3.5:4b` registered:
 
    ```bash
    uv run csv-agent-eval data/products.csv evals/products.json --models qwen3.5:9b qwen3.5:4b --record

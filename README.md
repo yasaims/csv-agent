@@ -63,9 +63,6 @@ uv run pytest            # unit tests (no Ollama needed)
 uv run pytest -m ollama  # end-to-end tests against the local Ollama model
 ```
 
-- `tests/unit`: contract-level tests. The agent loop is tested with a scripted fake client that returns real `ollama.ChatResponse` objects.
-- `tests/integration`: a few end-to-end questions against `data/products.csv` (lookup, aggregate, condition). Skipped when the model is not available. Answers are checked by keywords, so results can vary with model output.
-
 ## Limitations
 
 - Intended for small CSV files: all rows are held in memory and the BM25 index is built at startup.
