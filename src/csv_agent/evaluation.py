@@ -17,6 +17,9 @@ from csv_agent.agent import AgentStepLimitError, ChatClient, CsvAgent
 from csv_agent.eval_records import record_run, repo_root
 from csv_agent.table import Table
 
+# Fixed so recorded runs and baselines stay comparable.
+REPEATS = 3
+
 
 @dataclass(frozen=True)
 class EvalCase:
@@ -127,7 +130,6 @@ def _parse_args(argv: Sequence[str] | None) -> argparse.Namespace:
     parser.add_argument("csv", help="Path to the CSV file")
     parser.add_argument("cases", help="Path to a JSON file with evaluation cases")
     parser.add_argument("--models", nargs="+", required=True, help="Ollama model names to compare")
-    parser.add_argument("--repeats", type=int, default=1, help="Runs per case and model (default: 1)")
     parser.add_argument("--think", action="store_true", help="Enable the models' thinking mode")
     parser.add_argument("-o", "--output", help="Write every result as JSON Lines to this path")
     parser.add_argument(
@@ -153,7 +155,7 @@ def _record(args: argparse.Namespace, results: Sequence[EvalResult]) -> int:
     run = {
         "csv": Path(args.csv).as_posix(),
         "cases": Path(args.cases).as_posix(),
-        "repeats": args.repeats,
+        "repeats": REPEATS,
         "think": args.think,
         "models": {model: asdict(s) for model, s in summaries.items()},
         "results": [asdict(r) for r in results],
@@ -181,7 +183,7 @@ def main(argv: Sequence[str] | None = None, client: ChatClient | None = None) ->
     results: list[EvalResult] = []
     for model in args.models:
         for case in cases:
-            for run in range(args.repeats):
+            for run in range(REPEATS):
                 result = run_case(table, case, model, run, client=client, think=args.think)
                 results.append(result)
                 mark = "PASS" if result.passed else "FAIL"

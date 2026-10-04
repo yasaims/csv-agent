@@ -38,13 +38,13 @@ Thinking mode is off by default to keep responses fast.
 
 ```bash
 # Compare models on fixed questions
-uv run csv-agent-eval data/products.csv evals/products.json --models qwen3.5:9b qwen3.5:4b --repeats 3
+uv run csv-agent-eval data/products.csv evals/products.json --models qwen3.5:9b qwen3.5:4b
 
 # Record the run in the repository (evals/records/) so the PR check can see it
-uv run csv-agent-eval data/products.csv evals/products.json --models qwen3.5:9b --repeats 3 --record
+uv run csv-agent-eval data/products.csv evals/products.json --models qwen3.5:9b --record
 
 # Replace the evaluated models' baselines with this run, e.g. after changing evaluation cases
-uv run csv-agent-eval data/products.csv evals/products.json --models qwen3.5:9b --repeats 3 --reset-baseline "tightened expected keywords"
+uv run csv-agent-eval data/products.csv evals/products.json --models qwen3.5:9b --reset-baseline "tightened expected keywords"
 ```
 
 Before opening a PR, commit your code, run the evaluation with `--record`, and commit `evals/records/`.
