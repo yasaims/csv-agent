@@ -56,9 +56,20 @@ class CsvAgent:
         self._think = think
         self._max_steps = max_steps
         self._on_tool_call = on_tool_call
-        self._messages: list[Mapping[str, Any] | Message] = [
-            {"role": "system", "content": SYSTEM_PROMPT.format(schema=self._tools.get_schema())}
-        ]
+        self._system_prompt = SYSTEM_PROMPT.format(schema=self._tools.get_schema())
+        self._context_tokens = 0
+        self._messages: list[Mapping[str, Any] | Message] = []
+        self.reset()
+
+    def reset(self) -> None:
+        """Forget the conversation and start over from the system prompt."""
+        self._context_tokens = 0
+        self._messages = [{"role": "system", "content": self._system_prompt}]
+
+    @property
+    def context_tokens(self) -> int:
+        """Tokens the model processed in the last chat call: the current conversation size."""
+        return self._context_tokens
 
     def ask(self, question: str) -> str:
         self._messages.append({"role": "user", "content": question})
@@ -66,6 +77,7 @@ class CsvAgent:
             response = self._client.chat(
                 model=self._model, messages=self._messages, tools=self._tools.functions, think=self._think
             )
+            self._context_tokens = (response.prompt_eval_count or 0) + (response.eval_count or 0)
             message = response.message
             self._messages.append(message)
             if not message.tool_calls:
