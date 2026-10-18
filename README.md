@@ -1,7 +1,7 @@
 # csv-agent
 
-A small sample AI agent that answers questions about **a single small CSV file**, using a local [Ollama](https://ollama.com) model (`qwen3.5:9b` by default).
-Chat with it in a pixel-art web GUI that highlights the rows and cells each answer is based on.
+AI agent that answers questions about **a single CSV file**, using a local model.
+Chat with it in a pixel-art web GUI.
 
 ![csv-agent GUI: CSV table with evidence highlighted, chat with the agent](docs/images/gui.png)
 
